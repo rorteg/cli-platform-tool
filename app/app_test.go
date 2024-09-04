@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"flag"
 	"io"
+	"net"
 	"os"
 	"strings"
 	"testing"
@@ -35,8 +36,8 @@ func TestSearchIps(t *testing.T) {
 	io.Copy(&buf, r)
 
 	output := buf.String()
-	if !strings.Contains(output, "192.") {
-		t.Errorf("Expected output to contain '192.', got %s", output)
+	if !isValidIP(output) {
+		t.Errorf("Expected output to be a valid IP, got %s", output)
 	}
 }
 
@@ -67,4 +68,9 @@ func TestSearchServers(t *testing.T) {
 	if !strings.Contains(output, "ns") {
 		t.Errorf("Expected output to contain 'ns', got %s", output)
 	}
+}
+
+func isValidIP(ip string) bool {
+	trimmedIP := strings.TrimSpace(ip)
+	return net.ParseIP(trimmedIP) != nil
 }
