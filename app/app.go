@@ -1,3 +1,4 @@
+// app.go
 package app
 
 import (
@@ -8,7 +9,11 @@ import (
 	"github.com/urfave/cli"
 )
 
-// Gerar vai retornar a aplicação de linha de comando pronta para ser executada. Test
+// Variáveis globais para permitir sobrescrever as funções nos testes
+var lookupIP = net.LookupIP
+var lookupNS = net.LookupNS
+
+// Build vai retornar a aplicação de linha de comando pronta para ser executada
 func Build() *cli.App {
 	app := cli.NewApp()
 	app.Name = "Aplicação de Linha de Comando"
@@ -41,7 +46,7 @@ func Build() *cli.App {
 
 func searchServers(c *cli.Context) {
 	host := c.String("host")
-	servidores, erro := net.LookupNS(host)
+	servidores, erro := lookupNS(host) // Usando a variável global lookupNS
 	if erro != nil {
 		log.Fatal(erro)
 	}
@@ -53,7 +58,7 @@ func searchServers(c *cli.Context) {
 
 func searchIps(c *cli.Context) {
 	host := c.String("host")
-	ips, erro := net.LookupIP(host)
+	ips, erro := lookupIP(host) // Usando a variável global lookupIP
 	if erro != nil {
 		log.Fatal(erro)
 	}
