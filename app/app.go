@@ -8,7 +8,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-// Gerar vai retornar a aplicação de linha de comando pronta para ser executada.
+// Gerar vai retornar a aplicação de linha de comando pronta para ser executada. Test
 func Build() *cli.App {
 	app := cli.NewApp()
 	app.Name = "Aplicação de Linha de Comando"

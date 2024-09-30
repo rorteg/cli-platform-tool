@@ -31,16 +31,3 @@ jobs:
           with:
             go-version: 'stable'
         - run: go run main.go
-
-    discord:
-      runs-on: ubuntu-latest
-      steps:
-
-      - uses: actions/checkout@v2
-
-      - name: Run Discord Webhook
-        uses: Sniddl/discord-commits@v1.6
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          template: "avatar-with-link"
-          include-extras: true
