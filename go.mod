@@ -1,6 +1,6 @@
 module omni-cli
 
-go 1.23.0
+go 1.23
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
